@@ -19,7 +19,7 @@ def id_generator(size=5, chars=string.ascii_uppercase):
 
 file = 'Cust/Customers northwind ('
 
-for count in range (3):
+for count in range (6):
     if (count == 0):
         df = pd.read_csv('Cust/Customers northwind.csv')
     else:
@@ -27,7 +27,7 @@ for count in range (3):
         print(loc)
         df = pd.read_csv('Cust/Customers northwind.csv')
     for index, row in df.iterrows():
-        df.at[index,'customer_name']=id_generator(5,row['name'])
+        df.at[index,'customer_id']=id_generator(5,row['name'])
     if (count == 0):
         targetDF = df.copy()
     else:
@@ -39,4 +39,5 @@ targetDF = targetDF[cols]
 # print(targetDF.head())
 print(targetDF.tail())
 print(targetDF.shape)
+targetDF.drop_duplicates(subset=['customer_id'])
 targetDF.to_csv('appended.csv',index=False)
